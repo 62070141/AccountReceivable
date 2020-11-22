@@ -4,6 +4,7 @@ public class Customer{
     private String ID;
     private String name;
     private double amountDue;
+    private double advancePayment;
     private String details;
     private Timestamp dueDate;
     private Timestamp lastPaid;
@@ -47,6 +48,15 @@ public class Customer{
 
     public void setAmountDue(double amountDue) {
         this.amountDue = amountDue;
+        FirebaseService.setCustomer(this);
+    }
+
+    public double getAdvancePayment() {
+        return advancePayment;
+    }
+
+    public void setAdvancePayment(double advancePayment) {
+        this.advancePayment = advancePayment;
         FirebaseService.setCustomer(this);
     }
 

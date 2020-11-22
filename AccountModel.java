@@ -19,7 +19,14 @@ public class AccountModel {
         loadAll();
     }
 
-    public ArrayList<Customer> getSummary(int months){
+    public ArrayList<Customer> getAllCustomerByDueDate(){
+        while (loading){}
+        ArrayList<Customer> temp = new ArrayList<Customer>(cusMap.values());
+        temp.sort((cus1, cus2) -> cus1.getDueDate().compareTo(cus2.getDueDate()));
+        return temp;
+    }
+
+    public ArrayList<Customer> getAllCustomerByLastPaid(){
         while (loading){}
         ArrayList<Customer> temp = new ArrayList<Customer>(cusMap.values());
         temp.sort((cus1, cus2) -> cus1.getLastPaid().compareTo(cus2.getLastPaid()));
