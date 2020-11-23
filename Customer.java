@@ -110,9 +110,7 @@ public class Customer{
     }
 
     public void setID(String ID) {
-        FirebaseService.deleteCustomerByID(this.ID);
         this.ID = ID;
-        FirebaseService.setCustomer(this);
     }
 
     public String toString(){

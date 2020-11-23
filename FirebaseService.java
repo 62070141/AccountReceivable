@@ -10,7 +10,6 @@ public class FirebaseService {
             CustomerFirebase cusF = new CustomerFirebase(cus);
             Firestore dbFirestore = FirestoreClient.getFirestore();
             ApiFuture<WriteResult> future = dbFirestore.collection("Customers").document(cusF.ID).set(cusF);
-            System.out.println(cus);
             //while (!future.isDone()){}
             return true;
         }

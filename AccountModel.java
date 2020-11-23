@@ -106,9 +106,31 @@ public class AccountModel {
         return cusNum;
     }
 
+    public boolean delCustomer(Customer cus){
+        cusMap.remove(cus.getID());
+        IDList.remove(cus.getID());
+        return FirebaseService.deleteCustomerByID(cus.getID());
+    }
+
+    public boolean delCustomer(String ID){
+        cusMap.remove(ID);
+        IDList.remove(ID);
+        return FirebaseService.deleteCustomerByID(ID);
+    }
+
     public ArrayList<String> getIDList(){
         Collections.sort(IDList);
         return IDList;
+    }
+
+    public boolean changeID(String from, String to){
+            delCustomer(to);
+            Customer temp = getCustomer(from);
+            temp.setID(to);
+            cusMap.put(to, temp);
+            delCustomer(from);
+            IDList.add(to);
+            return FirebaseService.setCustomer(temp);
     }
 
     private void loadAll(){
