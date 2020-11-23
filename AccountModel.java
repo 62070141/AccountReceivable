@@ -2,6 +2,7 @@ import com.google.cloud.firestore.DocumentReference;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class AccountModel {
@@ -30,6 +31,14 @@ public class AccountModel {
         while (loading){}
         ArrayList<Customer> temp = new ArrayList<Customer>(cusMap.values());
         temp.sort((cus1, cus2) -> cus1.getLastPaid().compareTo(cus2.getLastPaid()));
+        return temp;
+    }
+
+    public ArrayList<Customer> getSummary(){
+        while (loading){}
+        ArrayList<Customer> temp = new ArrayList<Customer>(cusMap.values());
+        temp.removeIf(cus -> (cus.getAmountDue() <= 0));
+        temp.sort((cus1, cus2) -> cus1.getDueDate().compareTo(cus2.getDueDate()));
         return temp;
     }
 
@@ -98,6 +107,7 @@ public class AccountModel {
     }
 
     public ArrayList<String> getIDList(){
+        Collections.sort(IDList);
         return IDList;
     }
 
