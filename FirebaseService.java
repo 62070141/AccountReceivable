@@ -28,10 +28,17 @@ public class FirebaseService {
             DocumentSnapshot doc = future.get();
             long start = System.currentTimeMillis();
             Customer cus = null;
+
+            /*หากโหลดช้าจะรอ 5 วินาที ไม่งั้นจะถือว่าไม่ได้รับข้อมูล*/
             while (!doc.exists()){
                 long now = System.currentTimeMillis();
 
                 if(doc.exists()){
+
+                    /*หากไม่ใช้ toObject สามารถเปลี่ยน doc เป็น HashMap หรือ JSON แล้วเลือก attribute ทีละตัว
+                    *เนื่องจากข้อมูลที่รับมาจาก Firebase นั้นอยู่ในรูปแบบของ JSON
+                    **/
+
                     cus = new Customer(doc.toObject(CustomerFirebase.class));
                     break;
                 }
